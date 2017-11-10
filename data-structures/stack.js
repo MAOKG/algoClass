@@ -51,29 +51,48 @@ What's the time complexity?
  */
 
 function Stack(capacity) {
-  // implement me...
+  this._maxCapacity = capacity | Infinity;
+  this._count = 0;
+  this._last = null;
 }
 
 Stack.prototype.push = function(value) {
-  // implement me...
+  if (this.count === this.maxCapacity) {
+    return 'Max capacity already reached. Remove element before adding a new one.';
+  }
+  this._last = new Node(value, this._last);
+  this._count += 1;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.pop = function() {
-  // implement me...
+  if (this.count === 0) {
+    return 'No element in the stack.';
+  }
+  let popEle = this._last._value;
+  this._last = this._last._pre;
+  this._count -= 1;
+  return popEle;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.peek = function() {
-  // implement me...
+  if (this._count === 0) {
+    return 'No element in the stack.';
+  }
+  return this._last._value;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.count = function() {
-  // implement me...
+  return this._count;
 };
-// Time complexity:
+// Time complexity: O(1)
 
+function Node(value, pre) {
+  this._value = value;
+  this._pre = pre;
+}
 
 /*
 *** Exercises:
